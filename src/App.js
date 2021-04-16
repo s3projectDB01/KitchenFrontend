@@ -1,14 +1,13 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
 import './App.css';
-import GetOrders from './GetOrders/GetOrders';
+import OrderList from './components/OrderList';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <GetOrders />
+        <h1>Orders</h1>
+        <OrderList />
         
       </header>
     </div>
