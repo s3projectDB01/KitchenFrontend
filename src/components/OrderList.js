@@ -26,14 +26,14 @@ class OrderList extends React.Component {
         const response = await fetch("https://localhost:6001/Order/all");
         const data = await response.json();
         this.setState({ orderItems: data, loading: false});
-        
     }
 
     static renderOrderItems(orderItems) {
 
         return (
             <div>
-                {orderItems.map(o => <OrderItem key={o.id} item={o}></OrderItem> )}
+                {/* map the orders and if they are not completed, then display the orderitem */}
+                {orderItems.map(o => (o.iscompleted ? "" : <OrderItem item={o} />))}
             </div>
         );
     }

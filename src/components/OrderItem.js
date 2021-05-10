@@ -34,11 +34,11 @@ function OrderItem(props) {
     return (
 
         <div className="orderitem">
-            <div>{props.item.tablenumber}</div>
-            <div>{calculateWaitingTime(props.item.date)} minutes</div>
-            <div>{props.item.date}</div>
+            <div className="orderitem-table">Table {props.item.tablenumber}</div>
+            <div className="orderitem-waitingtime">{calculateWaitingTime(props.item.date)} minutes</div>
             <div>{props.item.status}</div>
-            <div>€ {props.item.price}</div>
+            <div>{props.item.date}</div>
+            {/* <div>€ {props.item.price}</div> */}
             <button>DONE</button>
         </div>
 
