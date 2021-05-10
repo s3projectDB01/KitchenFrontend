@@ -13,7 +13,7 @@ class OrderList extends React.Component {
         return (
             <div>
                 {contents}
-                <button onClick={() => this.loadOrderItems()}>Reload!</button>
+                {/* <button onClick={() => this.loadOrderItems()}>Reload!</button> */}
             </div>
         );
     }
@@ -26,27 +26,15 @@ class OrderList extends React.Component {
         const response = await fetch("https://localhost:6001/Order/all");
         const data = await response.json();
         this.setState({ orderItems: data, loading: false});
+        
     }
 
     static renderOrderItems(orderItems) {
+
         return (
-            <center>
-                <table>
-                <thead>
-                    <tr>
-                        <th>Price</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Waiting time</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {orderItems.map(orderItem =>
-                        <OrderItem item={orderItem}></OrderItem>
-                    )}
-                </tbody>
-            </table>
-            </center>
+            <div>
+                {orderItems.map(o => <OrderItem key={o.id} item={o}></OrderItem> )}
+            </div>
         );
     }
 }
