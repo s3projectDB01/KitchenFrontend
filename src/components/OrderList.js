@@ -23,7 +23,7 @@ class OrderList extends React.Component {
     }
 
     async loadOrderItems() {
-        const response = await fetch("https://localhost:6001/Order/all");
+        const response = await fetch("https://localhost:6001/Order/allNotDone");
         const data = await response.json();
         this.setState({ orderItems: data, loading: false});
     }
@@ -32,8 +32,7 @@ class OrderList extends React.Component {
 
         return (
             <div>
-                {/* map the orders and if they are not completed, then display the orderitem */}
-                {orderItems.map(o => (o.iscompleted ? "" : <OrderItem item={o} />))}
+                {orderItems.map(o => <OrderItem item={o} />)}
             </div>
         );
     }
