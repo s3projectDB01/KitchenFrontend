@@ -5,7 +5,7 @@ import OrderList from './components/OrderList';
 function App() {
   return (
     <div className="App">
-        <h1>Order Overview</h1>
+        <h1>Kitchen Overview</h1>
 
         <OrderList />
         

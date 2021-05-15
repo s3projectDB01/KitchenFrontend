@@ -1,5 +1,6 @@
 import React from "react";
 import OrderItem from "./OrderItem";
+import "./OrderList.css";
 
 class OrderList extends React.Component {
     constructor(props) {
@@ -13,7 +14,6 @@ class OrderList extends React.Component {
         return (
             <div>
                 {contents}
-                {/* <button onClick={() => this.loadOrderItems()}>Reload!</button> */}
             </div>
         );
     }
@@ -31,7 +31,7 @@ class OrderList extends React.Component {
     static renderOrderItems(orderItems) {
 
         return (
-            <div>
+            <div className="orderlist">
                 {orderItems.map(o => <OrderItem item={o} />)}
             </div>
         );

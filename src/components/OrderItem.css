@@ -1,15 +1,20 @@
 body {
-    background-color: #80d4ff;
+    background-color: white;
 }
 
 .orderitem {
     margin: 20px;
     padding: 15px;
-    border: 1px solid #bbb;
-    background-color: #0066cc;
-    border-radius: 5px;
+    border: 2px solid #02407e;
+    background-color: #7cb4ec;
+    border-radius: 8px;
     display: inline-block;
-    width: 300px;
+    width: 350px;
+}
+
+.orderitem:hover {
+    background-color: rgb(0, 102, 204, 0.7);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .orderitem span {
@@ -18,11 +23,53 @@ body {
     color: #333;
 }
 
-.orderitem-table {
+.orderitem-status {
     font-size: 40px;
     text-align: center;
 }
 
 .orderitem-waitingtime {
-    background-color: yellow;
+    background-color: rgb(253, 240, 65);
+    border-radius: 15px;
+    text-align: center;
+    padding: 3px;
+    margin: 15px;
+}
+
+.orderitem-details {
+    border: 3px solid black;
+    padding: 5px;
+    margin: 15px;
+}
+
+.orderitem-details-items {
+    text-align: left;
+}
+
+/* --------------BUTTON STYLING----------------- */
+.btns {
+    display: inline-block;
+}
+
+.btn-progress {
+    text-align: left;
+    background-color: orange;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 5px;
+}
+.btn-progress:hover {
+    background-color: rgb(243, 212, 155);
+}
+
+.btn-done {
+    text-align: right;
+    background-color: green;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+.btn-done:hover {
+    background-color: rgb(129, 194, 129);
 }

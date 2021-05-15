@@ -51,13 +51,30 @@ function refreshPage() {
 }
 
 function OrderItem(props) {
+    
+
     return (
         <div className="orderitem">
-            <div className="orderitem-table">Order</div>
+            {/* <div className="orderitem-table">Order</div> */}
+            <div className="orderitem-status">{props.item.status}</div>
             <div className="orderitem-waitingtime">Waiting for {calculateWaitingTime(props.item.date)} minutes</div>
-            <div>{props.item.status}</div>
-            <button onClick={() => updateStatusToProgress(props.item)}>In Progress</button>
-            <button onClick={() => updateStatusToDone(props.item)}>DONE</button>
+            <div className="orderitem-details">
+                Order Details:
+                <div className="orderitem-details-items">
+                    <ol>
+                        MenuItem 1
+                    </ol>
+                </div>
+            </div>
+
+            <div className="btns">
+                {
+                    props.item.status === "pending" ? 
+                    <button className="btn-progress" onClick={() => updateStatusToProgress(props.item)}>In Progress</button> :
+                    <button className="btn-done" onClick={() => updateStatusToDone(props.item)}>DONE</button>
+                }
+            </div>
+
         </div>
     )
 }
