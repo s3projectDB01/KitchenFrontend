@@ -61,9 +61,9 @@ function OrderItem(props) {
             <div className="orderitem-details">
                 Order Details:
                 <div className="orderitem-details-items">
-                    <ol>
-                        MenuItem 1
-                    </ol>
+                    <ul>
+                        
+                    </ul>
                 </div>
             </div>
 
