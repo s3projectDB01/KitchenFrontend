@@ -5,11 +5,10 @@ import OrderList from './components/OrderList';
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Orders</h1>
+        <h1>Kitchen Overview</h1>
+
         <OrderList />
         
-      </header>
     </div>
   );
 }
