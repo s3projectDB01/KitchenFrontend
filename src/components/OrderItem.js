@@ -22,7 +22,7 @@ function updateStatusToDone(props) {
     };
     console.log(newOrder)
 
-    fetch('https://localhost:6001/Order', requestOptions)
+    fetch(process.env.REACT_APP_API_URL + '/Order/Order', requestOptions)
         .then(response => response.json())
         .then(refreshPage)
 }
@@ -41,7 +41,7 @@ function updateStatusToProgress(props) {
     };
     console.log(newOrder)
 
-    fetch('https://localhost:6001/Order', requestOptions)
+    fetch(process.env.REACT_APP_API_URL + '/Order/Order', requestOptions)
         .then(response => response.json())
         .then(refreshPage)
 }
