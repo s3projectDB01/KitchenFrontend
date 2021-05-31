@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Moment from "react-moment";
 import "./OrderItem.css";
 
@@ -6,6 +6,10 @@ import "./OrderItem.css";
 function calculateWaitingTime(createdTime) {
 
     return <Moment diff={createdTime} unit="minutes"></Moment>
+}
+
+function refreshPage() {
+    window.location.reload(false)
 }
 
 function updateStatusToDone(props) {
@@ -46,13 +50,28 @@ function updateStatusToProgress(props) {
         .then(refreshPage)
 }
 
-function refreshPage() {
-    window.location.reload(false)
+function LoadMenuItems(cb) {
+    
+    useEffect(() => {
+        async function fetchData() {
+            const response = await fetch('https://localhost:5001/MenuItem')
+            const data = await response.json();
+            cb(data)
+        }
+        fetchData();
+    }, [cb])
+}
+
+function LoadIngredients(props) {
+    props.ingredients ?
+    props.ingredients.map(i => <li>{i.name}</li>)
+    : console.log("no ingredients")
 }
 
 function OrderItem(props) {
+    const [menuitems, setMenuitems] = useState([])
+    LoadMenuItems(setMenuitems);
     
-
     return (
         <div className="orderitem">
             {/* <div className="orderitem-table">Order</div> */}
@@ -61,9 +80,12 @@ function OrderItem(props) {
             <div className="orderitem-details">
                 Order Details:
                 <div className="orderitem-details-items">
-                    <ul>
-                        
-                    </ul>
+                    {menuitems.map((m) => {
+                        return <>
+                            <ul key={m.id}>{m.name}</ul>
+                            {LoadIngredients(m)}
+                        </>
+                    })}
                 </div>
             </div>
 

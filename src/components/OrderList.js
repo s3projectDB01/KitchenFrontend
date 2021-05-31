@@ -29,7 +29,6 @@ class OrderList extends React.Component {
     }
 
     static renderOrderItems(orderItems) {
-
         return (
             <div className="orderlist">
                 {orderItems.map(o => <OrderItem item={o} />)}
