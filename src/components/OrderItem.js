@@ -57,7 +57,6 @@ function LoadMenuItems(cb) {
             const response = await fetch(window.globalConfig.API_URL + '/Menu/MenuItems')
             const data = await response.json();
             cb(data)
-            console.log(data)
         }
         fetchData();
     }, [cb])
@@ -65,7 +64,7 @@ function LoadMenuItems(cb) {
 
 function LoadIngredients(props) {
     props.ingredients ?
-    props.ingredients.map(i => <li>{i.name}</li>)
+    props.ingredients.map(i => <ul>{i.name}</ul>)
     : console.log("no ingredients")
 }
 
@@ -83,7 +82,10 @@ function OrderItem(props) {
                 <div className="orderitem-details-items">
                     {menuitems.map((m) => {
                         return <>
-                            <ul key={m.id}>{m.name}</ul>
+                            <ul key={m.id}>
+                                {m.name}
+                                {m.ingredients.map(i => <ul>{i.name}</ul>)}
+                            </ul>
                             {LoadIngredients(m)}
                         </>
                     })}
