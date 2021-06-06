@@ -50,11 +50,23 @@ function updateStatusToProgress(props) {
         .then(refreshPage)
 }
 
-function LoadMenuItems(cb) {
+// function LoadMenuItems(cb) {
+    
+//     useEffect(() => {
+//         async function fetchData() {
+//             const response = await fetch(window.globalConfig.API_URL + '/Menu/MenuItems')
+//             const data = await response.json();
+//             cb(data)
+//         }
+//         fetchData();
+//     }, [cb])
+// }
+
+function LoadMenuItems(id, cb) {
     
     useEffect(() => {
         async function fetchData() {
-            const response = await fetch(window.globalConfig.API_URL + '/Menu/MenuItems')
+            const response = await fetch(window.globalConfig.API_URL + '/Menu/MenuItems/GetById')
             const data = await response.json();
             cb(data)
         }
@@ -70,11 +82,13 @@ function LoadIngredients(props) {
 
 function OrderItem(props) {
     const [menuitems, setMenuitems] = useState([])
-    LoadMenuItems(setMenuitems);
+
+    props.item.items.map(i => (
+        LoadMenuItems(i.id, ...setMenuitems)
+    ))
     
     return (
         <div className="orderitem">
-            {/* <div className="orderitem-table">Order</div> */}
             <div className="orderitem-status">{props.item.status}</div>
             <div className="orderitem-waitingtime">Waiting for {calculateWaitingTime(props.item.date)} minutes</div>
             <div className="orderitem-details">
@@ -84,9 +98,8 @@ function OrderItem(props) {
                         return <>
                             <ul key={m.id}>
                                 {m.name}
-                                {m.ingredients.map(i => <ul>{i.name}</ul>)}
+                                {LoadIngredients(m)}
                             </ul>
-                            {LoadIngredients(m)}
                         </>
                     })}
                 </div>
