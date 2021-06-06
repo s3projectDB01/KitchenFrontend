@@ -84,8 +84,9 @@ function LoadIngredients(props) {
 function OrderItem(props) {
     const [menuitems, setMenuitems] = useState([])
 
+    console.log(props.item.items)
     props.item.items.map(i => (
-        LoadMenuItem(i.id, ...setMenuitems)
+        LoadMenuItem(i.menuitem, ...setMenuitems)
     ))
     
     return (
