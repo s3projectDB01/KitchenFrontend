@@ -26,7 +26,7 @@ function updateStatusToDone(props) {
     };
     console.log(newOrder)
 
-    fetch('https://localhost:6001/Order', requestOptions)
+    fetch(window.globalConfig.API_URL + '/Order/Order', requestOptions)
         .then(response => response.json())
         .then(refreshPage)
 }
@@ -45,7 +45,7 @@ function updateStatusToProgress(props) {
     };
     console.log(newOrder)
 
-    fetch('https://localhost:6001/Order', requestOptions)
+    fetch(window.globalConfig.API_URL + '/Order/Order', requestOptions)
         .then(response => response.json())
         .then(refreshPage)
 }

@@ -8,7 +8,6 @@ function App() {
         <h1>Kitchen Overview</h1>
 
         <OrderList />
-        
     </div>
   );
 }
