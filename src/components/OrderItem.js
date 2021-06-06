@@ -54,9 +54,10 @@ function LoadMenuItems(cb) {
     
     useEffect(() => {
         async function fetchData() {
-            const response = await fetch(window.globalConfig.API_URL + '/Menu/MenuItem')
+            const response = await fetch(window.globalConfig.API_URL + '/Menu/MenuItems')
             const data = await response.json();
             cb(data)
+            console.log(data)
         }
         fetchData();
     }, [cb])
