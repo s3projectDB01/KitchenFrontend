@@ -62,13 +62,14 @@ function updateStatusToProgress(props) {
 //     }, [cb])
 // }
 
-function LoadMenuItems(id, cb) {
+function LoadMenuItem(id, cb) {
     
     useEffect(() => {
         async function fetchData() {
-            const response = await fetch(window.globalConfig.API_URL + '/Menu/MenuItems/GetById')
+            const response = await fetch(window.globalConfig.API_URL + '/Menu/MenuItems/GetById/id')
             const data = await response.json();
             cb(data)
+            console.log(data)
         }
         fetchData();
     }, [cb])
@@ -84,7 +85,7 @@ function OrderItem(props) {
     const [menuitems, setMenuitems] = useState([])
 
     props.item.items.map(i => (
-        LoadMenuItems(i.id, ...setMenuitems)
+        LoadMenuItem(i.id, ...setMenuitems)
     ))
     
     return (
