@@ -24,11 +24,14 @@ class OrderList extends React.Component {
     componentDidMount() {
         this.loadOrderItems();
 
-        this.connection.on("NewOrder", this.loadOrderItems)
+        this.connection.on("NewOrder", this.loadOrderItems);
+
+        this.connection.start();
     }
 
     async loadOrderItems() {
-        const response = await fetch(window.globalConfig.API_URL + "/Order/Order/allNotDone");
+        console.log("it ran")
+        const response = await fetch(window.globalConfig.API_URL + "/Order/allNotDone");
         const data = await response.json();
         this.setState({ orderItems: data, loading: false});
     }
