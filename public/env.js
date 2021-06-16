@@ -1,3 +1,3 @@
 window.globalConfig = {
-    API_URL: "test123"
+    API_URL: "https://localhost:6001"
 }

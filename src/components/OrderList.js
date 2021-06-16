@@ -1,11 +1,14 @@
 import React from "react";
 import OrderItem from "./OrderItem";
 import "./OrderList.css";
+import * as signalR from "@microsoft/signalr";
 
 class OrderList extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = { orderItems: [], loading: true };
+        this.connection = new signalR.HubConnectionBuilder().withUrl(window.globalConfig.API_URL + "/orderHub").build();
     }
 
     render() {
@@ -20,6 +23,8 @@ class OrderList extends React.Component {
 
     componentDidMount() {
         this.loadOrderItems();
+
+        this.connection.on("orderCreated", this.loadOrderItems)
     }
 
     async loadOrderItems() {
