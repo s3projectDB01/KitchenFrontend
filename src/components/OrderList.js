@@ -31,7 +31,7 @@ class OrderList extends React.Component {
 
     async loadOrderItems() {
         console.log("it ran")
-        const response = await fetch(window.globalConfig.API_URL + "/Order/allNotDone");
+        const response = await fetch(window.globalConfig.API_URL + "/Order/Order/allNotDone");
         const data = await response.json();
         this.setState({ orderItems: data, loading: false});
     }
