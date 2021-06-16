@@ -24,7 +24,7 @@ class OrderList extends React.Component {
     componentDidMount() {
         this.loadOrderItems();
 
-        this.connection.on("orderCreated", this.loadOrderItems)
+        this.connection.on("NewOrder", this.loadOrderItems)
     }
 
     async loadOrderItems() {
