@@ -68,7 +68,7 @@ async function GetMenuItems(itemids) {
         
         async function fetchData() {
             const response = await fetch(window.globalConfig.API_URL + `/Menu/MenuItems/GetById/${element.id}`, {method:"GET", mode:"cors",
-             headers: {'Content-Type': 'application/json'}, credentials: '*'})
+             headers: {'Content-Type': 'application/json'}, credentials: 'include'})
             const data = await response.json();
             return data;
         }
