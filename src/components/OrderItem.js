@@ -67,7 +67,7 @@ async function GetMenuItems(itemids) {
     return itemids.map(element => {
         
         async function fetchData() {
-            const response = await fetch(window.globalConfig.API_URL + `/Menu/MenuItems/GetById/${element.id}`)
+            const response = await fetch(window.globalConfig.API_URL + `/Menu/MenuItems/GetById/${element.id}`, {method:"GET", mode:"cors"})
             const data = await response.json();
             return data;
         }
