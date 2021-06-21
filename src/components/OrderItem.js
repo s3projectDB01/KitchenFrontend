@@ -54,7 +54,7 @@ function LoadMenuItems(cb, menuitemid) {
     
     useEffect(() => {
         async function fetchData() {
-            const response = await fetch(window.globalConfig.API_URL + '/Menu/MenuItems/${menuitemid}')
+            const response = await fetch(window.globalConfig.API_URL + '/Menu/MenuItems/GetById/${menuitemid}')
             const data = await response.json();
             cb(data)
         }
@@ -90,7 +90,7 @@ function OrderItem(props) {
             <div className="orderitem-details">
                 Order Details:
                 <div className="orderitem-details-items">
-
+{/* props.item.items .map menuitem.id => loadmenuitem in list() */}
 
                     {menuitems.map((m) => {
                         return <>
