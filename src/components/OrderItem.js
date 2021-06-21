@@ -50,11 +50,23 @@ function updateStatusToProgress(props) {
         .then(refreshPage)
 }
 
-function LoadMenuItems(cb, menuitemid) {
+// function LoadMenuItems(menuitemid, cb ) {
     
+//     useEffect(() => {
+//         async function fetchData() {
+//             const response = await fetch(window.globalConfig.API_URL + '/Menu/MenuItems/GetById/?id=${menuitemid}')
+//             const data = await response.json();
+//             cb(data)
+//         }
+//         fetchData();
+//     }, [cb])
+// }
+
+function GetMenuItem(cb, menuitemid) {
+
     useEffect(() => {
         async function fetchData() {
-            const response = await fetch(window.globalConfig.API_URL + '/Menu/MenuItems/GetById/${menuitemid}')
+            const response = await fetch(window.globalConfig.API_URL + '/Menu/MenuItems/GetById/?id=${menuitemid}')
             const data = await response.json();
             cb(data)
         }
@@ -70,9 +82,12 @@ function LoadMenuItems(cb, menuitemid) {
 
 function OrderItem(props) {
     const [menuitems, setMenuitems] = useState([])
-    LoadMenuItems(props.item.id, ...setMenuitems)
+    //LoadMenuItems(props.item.id, ...setMenuitems)
 
 
+    props.item.items.map(i => {
+        setMenuitems([...menuitems, GetMenuItem(i.id)]);
+    })
 
 
     // console.log(props.item.items)
@@ -90,7 +105,6 @@ function OrderItem(props) {
             <div className="orderitem-details">
                 Order Details:
                 <div className="orderitem-details-items">
-{/* props.item.items .map menuitem.id => loadmenuitem in list() */}
 
                     {menuitems.map((m) => {
                         return <>
