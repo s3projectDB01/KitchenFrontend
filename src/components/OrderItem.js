@@ -50,11 +50,11 @@ function updateStatusToProgress(props) {
         .then(refreshPage)
 }
 
-// function LoadMenuItems(menuitemid, cb ) {
-    
+// function GetMenuItem(cb, menuitemid) {
+
 //     useEffect(() => {
 //         async function fetchData() {
-//             const response = await fetch(window.globalConfig.API_URL + '/Menu/MenuItems/GetById/?id=${menuitemid}')
+//             const response = await fetch(window.globalConfig.API_URL + `/Menu/MenuItems/GetById/${menuitemid}`)
 //             const data = await response.json();
 //             cb(data)
 //         }
@@ -62,16 +62,17 @@ function updateStatusToProgress(props) {
 //     }, [cb])
 // }
 
-function GetMenuItem(cb, menuitemid) {
+async function GetMenuItems(itemids) {
 
-    useEffect(() => {
+    return itemids.map(element => {
+        
         async function fetchData() {
-            const response = await fetch(window.globalConfig.API_URL + '/Menu/MenuItems/GetById/?id=${menuitemid}')
+            const response = await fetch(window.globalConfig.API_URL + `/Menu/MenuItems/GetById/${element.id}`)
             const data = await response.json();
-            cb(data)
+            return data;
         }
-        fetchData();
-    }, [cb])
+        return fetchData();
+    });
 }
 
 // function LoadIngredients(props) {
@@ -82,19 +83,19 @@ function GetMenuItem(cb, menuitemid) {
 
 function OrderItem(props) {
     const [menuitems, setMenuitems] = useState([])
-    //LoadMenuItems(props.item.id, ...setMenuitems)
 
+    useEffect(() => {
+        GetMenuItems(props.item.items)
+          .then(res => res.json())
+          .then(
+            (result) => { setMenuitems([...menuitems, result])
+            },
+            (error) => {
+              console.log("no menu items loaded")
+            }
+          )
+      }, [])
 
-    props.item.items.map(i => {
-        setMenuitems([...menuitems, GetMenuItem(i.id)]);
-    })
-
-
-    // console.log(props.item.items)
-
-    // props.item.items.map(i => (
-    //     LoadMenuItem(i.menuitem, ...setMenuitems)
-    // ))
     
     return (
         <div className="orderitem">
