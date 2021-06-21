@@ -50,11 +50,11 @@ function updateStatusToProgress(props) {
         .then(refreshPage)
 }
 
-function LoadMenuItems(cb) {
+function LoadMenuItems(cb, menuitemid) {
     
     useEffect(() => {
         async function fetchData() {
-            const response = await fetch(window.globalConfig.API_URL + '/Menu/MenuItems')
+            const response = await fetch(window.globalConfig.API_URL + '/Menu/MenuItems/${menuitemid}')
             const data = await response.json();
             cb(data)
         }
@@ -62,28 +62,18 @@ function LoadMenuItems(cb) {
     }, [cb])
 }
 
-// function LoadMenuItem(id, cb) {
-    
-//     useEffect(() => {
-//         async function fetchData() {
-//             const response = await fetch(window.globalConfig.API_URL + '/Menu/MenuItems/GetById/id')
-//             const data = await response.json();
-//             cb(data)
-//             console.log(data)
-//         }
-//         fetchData();
-//     }, [cb])
+// function LoadIngredients(props) {
+//     props.ingredients ?
+//     props.ingredients.map(i => <ul>{i.name}</ul>)
+//     : console.log("no ingredients")
 // }
-
-function LoadIngredients(props) {
-    props.ingredients ?
-    props.ingredients.map(i => <ul>{i.name}</ul>)
-    : console.log("no ingredients")
-}
 
 function OrderItem(props) {
     const [menuitems, setMenuitems] = useState([])
-    LoadMenuItems(setMenuitems)
+    LoadMenuItems(props.item.id, ...setMenuitems)
+
+
+
 
     // console.log(props.item.items)
 
@@ -94,15 +84,19 @@ function OrderItem(props) {
     return (
         <div className="orderitem">
             <div className="orderitem-status">{props.item.status}</div>
+            TODO: add table number to order item
+            {/* <div className="orderitem-tablenr">{props.item.tablenumber}</div> */}
             <div className="orderitem-waitingtime">Waiting for {calculateWaitingTime(props.item.date)} minutes</div>
             <div className="orderitem-details">
                 Order Details:
                 <div className="orderitem-details-items">
+
+
                     {menuitems.map((m) => {
                         return <>
                             <ul key={m.id}>
                                 {m.name}
-                                {LoadIngredients(m)}
+                                {/* {LoadIngredients(m)} */}
                             </ul>
                         </>
                     })}
