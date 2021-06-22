@@ -65,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
         border: "2px solid",
         textAlign: 'center',
         display: 'inline-block',
+        position: 'relative',
         float: 'left',
         margin: 30,
         "&:hover": {
@@ -77,13 +78,13 @@ const useStyles = makeStyles((theme) => ({
     },
     status: {
         background: '#a9a9a9',
-        // #FFE4B5
         borderBottom: "3px dotted",
     },
     details: {
         border: "1px solid",
         textAlign: 'left',
-        scrollBehavior: "smooth",
+        overflowY: 'auto',
+        maxHeight: '140px'
     },
     pending: {
         background: '#FF0000',
@@ -96,9 +97,10 @@ const useStyles = makeStyles((theme) => ({
         background: '#568884',
     },
     buttons: {
-        position: "relative",
-        bottom: "0",
-        left: "0",
+        position: "absolute",
+        bottom: "10px",
+        left: "50%",
+        transform: "translateX(-50%)"
     }
 }));
 
