@@ -164,7 +164,7 @@ function OrderItem(props) {
                 <div style={styles.detailitems} className="orderitem-details-items">
                     <ul>
                         {props.item.items.map(menuItem => {
-                            return <MenuItem menuItemId={menuItem.menuItem} />
+                            return <MenuItem menuItemId={menuItem.menuItem} amount={menuItem.amount}/>
                         })}
                     </ul>
                 </div>
