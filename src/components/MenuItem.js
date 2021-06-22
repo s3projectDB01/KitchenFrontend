@@ -14,7 +14,7 @@ class MenuItem extends React.Component {
         let contents = this.state.loading ? <span>Loading...</span> : this.state.menuItem;
 
         return (
-            <li> {this.props.amount}x {contents}</li>
+            <ul> {this.props.amount}x {contents}</ul>
         );
     }
 

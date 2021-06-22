@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Moment from "react-moment";
 import "./OrderItem.css";
 import Button from '@material-ui/core/Button';
@@ -61,6 +61,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         background: '#DCE3E9',
         width: 345,
+        height: 300,
         border: "2px solid",
         textAlign: 'center',
         display: 'inline-block',
@@ -68,63 +69,61 @@ const useStyles = makeStyles((theme) => ({
         margin: 30,
         "&:hover": {
             background: '#C6CCD1',
+        },
+        scroll: {
+            maxHeight: "400px",
+            overflowY: 'scroll',
         }
     },
     status: {
-        // background: '#CA0088',
+        background: '#a9a9a9',
+        // #FFE4B5
         borderBottom: "3px dotted",
     },
     details: {
-        border: "1px soldid",
-        background: "#55555",
+        border: "1px solid",
+        textAlign: 'left',
+        scrollBehavior: "smooth",
     },
     pending: {
         background: '#FF0000',
     },
     inprogress: {
         background: '#FFFF00',
+    },
+    itemsmenu: {
+        textAlign: 'left',
+        background: '#568884',
+    },
+    buttons: {
+        position: "relative",
+        bottom: "0",
+        left: "0",
     }
 }));
 
 
-
 function OrderItem(props) {
-//     const [menuitems, setMenuitems] = useState([])
-
-//     useEffect(() => {
-//         GetMenuItems(props.item.items)
-//           .then(res => res.json())
-//           .then((result) => { setMenuitems([...menuitems, result])}, (error) => {console.log("no menu items loaded")})
-//     }, )
-
-
     const classes = useStyles();
 
     return (
     <Card className={classes.root}>
         <CardHeader className={classes.status}
-            title={props.item.status}
+            title={<TableNumber orderId={props.item.id} />}
             subheader={<>Waiting for {calculateWaitingTime(props.item.date)} minutes</>}
         />
         
         <CardContent>
             <div className={classes.details}>
-                <div style={classes.status} className="orderitem-status">{props.item.status}</div>
-                <TableNumber orderId={props.item.id} />
-                <div className="orderitem-waitingtime">Waiting for {calculateWaitingTime(props.item.date)} minutes</div>
-                <div style={classes.details} className="orderitem-details">
-                    Order Details:
-                    <div className="orderitem-details-items">
-                        <ul>
-                            {props.item.items.map(menuItem => {
-                                return <MenuItem menuItemId={menuItem.menuItem} amount={menuItem.amount}/>
-                            })}
-                        </ul>
-                    </div>
-                </div>
+                <ul>
+                    {props.item.items.map(menuItem => {
+                        return <MenuItem menuItemId={menuItem.menuItem} amount={menuItem.amount} key={menuItem.id}/>
+                    })}
+                </ul>
             </div>
-
-            <div className="btns">
+        </CardContent>
+        <CardContent>
+            <div className={classes.buttons}>
                 {
                     props.item.status === "pending" ? 
                     <Button variant='contained' color='primary' className="btn-progress" onClick={() => updateStatusToProgress(props.item)}>IN PROGRESS</Button> :

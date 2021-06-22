@@ -11,7 +11,7 @@ class TableNumber extends React.Component {
     }
 
     render() {
-        return (this.state.loading ? <span>Loading...</span> : <span>Table: {this.state.tableNumber}</span>);
+        return (this.state.loading ? <span>Loading...</span> : <span>Table {this.state.tableNumber}</span>);
     }
 
     async populateTableNumber() {
