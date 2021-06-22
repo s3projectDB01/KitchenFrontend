@@ -6,8 +6,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
-import { deprecationHandler } from "moment";
-
 import MenuItem from "./MenuItem";
 import TableNumber from "./TableNumber";
 
@@ -91,14 +89,13 @@ const useStyles = makeStyles((theme) => ({
 
 
 function OrderItem(props) {
+//     const [menuitems, setMenuitems] = useState([])
 
-    const [menuitems, setMenuitems] = useState([])
-
-    useEffect(() => {
-        GetMenuItems(props.item.items)
-          .then(res => res.json())
-          .then((result) => { setMenuitems([...menuitems, result])}, (error) => {console.log("no menu items loaded")})
-    }, )
+//     useEffect(() => {
+//         GetMenuItems(props.item.items)
+//           .then(res => res.json())
+//           .then((result) => { setMenuitems([...menuitems, result])}, (error) => {console.log("no menu items loaded")})
+//     }, )
 
 
     const classes = useStyles();
@@ -109,21 +106,23 @@ function OrderItem(props) {
             title={props.item.status}
             subheader={<>Waiting for {calculateWaitingTime(props.item.date)} minutes</>}
         />
+        
         <CardContent>
             <div className={classes.details}>
-              <div style={classes.status} className="orderitem-status">{props.item.status}</div>
-              <TableNumber orderId={props.item.id} />
-              <div className="orderitem-waitingtime">Waiting for {calculateWaitingTime(props.item.date)} minutes</div>
-              <div style={classes.details} className="orderitem-details">
-                Order Details:
-                <div className="orderitem-details-items">
-                    <ul>
-                        {props.item.items.map(menuItem => {
-                            return <MenuItem menuItemId={menuItem.menuItem} amount={menuItem.amount}/>
-                        })}
-                    </ul>
+                <div style={classes.status} className="orderitem-status">{props.item.status}</div>
+                <TableNumber orderId={props.item.id} />
+                <div className="orderitem-waitingtime">Waiting for {calculateWaitingTime(props.item.date)} minutes</div>
+                <div style={classes.details} className="orderitem-details">
+                    Order Details:
+                    <div className="orderitem-details-items">
+                        <ul>
+                            {props.item.items.map(menuItem => {
+                                return <MenuItem menuItemId={menuItem.menuItem} amount={menuItem.amount}/>
+                            })}
+                        </ul>
+                    </div>
                 </div>
-              </div>
+            </div>
 
             <div className="btns">
                 {
@@ -132,65 +131,11 @@ function OrderItem(props) {
                     <Button variant='contained' color='secondary' className="btn-done" onClick={() => updateStatusToDone(props.item)}>DONE</Button>
                 }
             </div>
-
         </CardContent>
+
     </Card>
   );
 }
-
-
-
-
-
-// function OrderItem(props) {
-
-//     const styles = () => ({
-//         orderitemstyle: {
-//             background: "#f1f1f1",
-//             marginTop: '15px',
-//             width: '350px',
-//             padding: '5px',
-//             maxWidth: '800px',
-//             border: 1,
-//             '&:hover': {
-//                 background: '#DCE3E9',
-//                 boxShadow: 3,
-//             },
-//         },
-
-//         status: {
-//             background: 'yellow',
-//             fontSize: 40,
-//             textAlign: 'center',
-//         },
-
-//         waitingTime: {
-//             background: '#FDF041',
-//             borderRadius: 15,
-//             textAlign: 'center',
-//             padding: 3,
-//             margin: 15,
-//         },
-
-//         details: {
-//             border: 3,
-//             padding: 5,
-//             margin: 15,
-//         },
-
-//         detailitems: {
-//             textAlign: 'left',
-//         },
-
-//         buttons: {
-//             variant: "contained",
-//             color: "primary",
-//             '&:hover': {
-//                 background: '#2c387e',
-//                 boxShadow: 3,
-//             },
-//         }
-//     })
 
 
 export default OrderItem;
