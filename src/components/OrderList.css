@@ -1,5 +1,8 @@
 .orderlist {
     text-align: center;
-    margin: 40px;
-    background-color: aqua;
+    height: calc(100vh - 3.2em);
+    overflow-y: scroll;
+    padding-bottom: 30px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
 }

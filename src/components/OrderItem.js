@@ -118,7 +118,7 @@ function OrderItem(props) {
     <Card className={classes.root}>
         <CardHeader className={classes.status}
             title={props.item.status}
-            subheader={`Waiting for ${calculateWaitingTime(props.item.date)} minutes`}
+            subheader={<>Waiting for {calculateWaitingTime(props.item.date)} minutes</>}
         />
         <CardContent>
             <div className={classes.details}>
