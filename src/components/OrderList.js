@@ -21,7 +21,7 @@ class OrderList extends React.Component {
     constructor(props) {
         super(props);
         this.state = { orderItems: [], loading: true };
-        this.connection = new signalR.HubConnectionBuilder().withUrl(window.globalConfig.API_URL + "/orderHub").build();
+        this.connection = new signalR.HubConnectionBuilder().withUrl(window.globalConfig.WEBSOCKET_URL).build();
     }
 
     render() {
