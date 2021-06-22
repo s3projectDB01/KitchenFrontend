@@ -2,22 +2,9 @@ import React from "react";
 import OrderItem from "./OrderItem";
 import "./OrderList.css";
 import * as signalR from "@microsoft/signalr";
-//import { withStyles } from "@material-ui/core/styles";
-
-
-// const styles = () => ({
-//   root: {
-//     background: "ffffff",
-//     width: '100%',
-//     display: 'flex',
-//     flexDirection: 'column',
-//     alignItems: 'center',
-//   }
-// });
 
 
 class OrderList extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = { orderItems: [], loading: true };
@@ -58,5 +45,4 @@ class OrderList extends React.Component {
     }
 }
 
-// export default withStyles(styles)(OrderList);
 export default OrderList;
