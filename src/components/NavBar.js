@@ -5,6 +5,9 @@ function NavBar() {
     const styleObj = {
         color: "#fff",
         textAlign: "center",
+        fontSize: "2em",
+        marginBlockStart: "0.6em",
+        marginBlockEnd: "0.6em"
     }
 
     return(
