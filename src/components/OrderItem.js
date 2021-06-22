@@ -95,9 +95,10 @@ function OrderItem(props) {
         orderitemstyle: {
             background: "#f1f1f1",
             marginTop: '15px',
-            width: '100%',
+            width: '350px',
             padding: '5px',
             maxWidth: '800px',
+            border: 1,
             '&:hover': {
                 background: '#DCE3E9',
                 boxShadow: 3,
@@ -105,6 +106,7 @@ function OrderItem(props) {
         },
 
         status: {
+            background: 'yellow',
             fontSize: 40,
             textAlign: 'center',
         },
