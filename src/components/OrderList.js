@@ -21,7 +21,7 @@ class OrderList extends React.Component {
     constructor(props) {
         super(props);
         this.state = { orderItems: [], loading: true };
-        this.connection = new signalR.HubConnectionBuilder().withUrl(window.globalConfig.WEBSOCKET_URL + "").build();
+        this.connection = new signalR.HubConnectionBuilder().withUrl(window.globalConfig.WEBSOCKET_URL).build();
     }
 
     render() {
@@ -52,7 +52,7 @@ class OrderList extends React.Component {
     static renderOrderItems(orderItems) {
         return (
             <div className="orderlist">
-                {orderItems.map(o => <OrderItem item={o} />)}
+                {orderItems.map(o => <OrderItem item={o} key={o.id} />)}
             </div>
         );
     }
