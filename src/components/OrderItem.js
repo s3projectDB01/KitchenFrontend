@@ -3,6 +3,7 @@ import Moment from "react-moment";
 import "./OrderItem.css";
 import Button from '@material-ui/core/Button';
 import MenuItem from "./MenuItem";
+import TableNumber from "./TableNumber";
 
 
 function calculateWaitingTime(createdTime) {
@@ -156,7 +157,7 @@ function OrderItem(props) {
     return (
         <div style={styles.orderitemstyle} className="orderitem">
             <div style={styles.status} className="orderitem-status">{props.item.status}</div>
-            TODO: add table number to order item
+            <TableNumber orderId={props.item.id} />
             {/* <div className="orderitem-tablenr">{props.item.tablenumber}</div> */}
             <div style={styles.waitingTime} className="orderitem-waitingtime">Waiting for {calculateWaitingTime(props.item.date)} minutes</div>
             <div style={styles.details} className="orderitem-details">
