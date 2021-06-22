@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Moment from "react-moment";
 import "./OrderItem.css";
+import Button from '@material-ui/core/Button';
 
 
 function calculateWaitingTime(createdTime) {
@@ -50,22 +51,9 @@ function updateStatusToProgress(props) {
         .then(refreshPage)
 }
 
-// function GetMenuItem(cb, menuitemid) {
-
-//     useEffect(() => {
-//         async function fetchData() {
-//             const response = await fetch(window.globalConfig.API_URL + `/Menu/MenuItems/GetById/${menuitemid}`)
-//             const data = await response.json();
-//             cb(data)
-//         }
-//         fetchData();
-//     }, [cb])
-// }
-
 async function GetMenuItems(itemids) {
 
     return itemids.map(element => {
-        
         async function fetchData() {
             const response = await fetch(window.globalConfig.API_URL + `/Menu/MenuItems/GetById/${element.id}`, {method:"GET", mode:"cors",
              headers: {'Content-Type': 'application/json'}, credentials: 'include'})
@@ -76,30 +64,64 @@ async function GetMenuItems(itemids) {
     });
 }
 
-// function LoadIngredients(props) {
-//     props.ingredients ?
-//     props.ingredients.map(i => <ul>{i.name}</ul>)
-//     : console.log("no ingredients")
+
+// async function GetIngredients(ingredientids) {
+
+//     return ingredientids.map(element => {
+        
+//         async function fetchData() {
+//             const response = await fetch(window.globalConfig.API_URL + `/Inventory/MenuItems/GetById/${element.id}`, {method:"GET", mode:"cors",
+//              headers: {'Content-Type': 'application/json'}, credentials: 'include'})
+//             const data = await response.json();
+//             return data;
+//         }
+//         return fetchData();
+//     });
 // }
 
+
+
+
+
+
+
+
+
+
+
 function OrderItem(props) {
+
+    const styles = () => ({
+        orderlist: {
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center'
+        },
+        orderItem: {
+        marginTop: '15px',
+        width: '100%',
+        padding: '5px',
+        maxWidth: '800px'
+        },
+        buttons: {
+            variant: "contained",
+            color: "primary",
+        }
+    })
+
+
     const [menuitems, setMenuitems] = useState([])
 
     useEffect(() => {
         GetMenuItems(props.item.items)
           .then(res => res.json())
-          .then(
-            (result) => { setMenuitems([...menuitems, result])
-            },
-            (error) => {
-              console.log("no menu items loaded")
-            }
-          )
-      }, [])
+          .then((result) => { setMenuitems([...menuitems, result])}, (error) => {console.log("no menu items loaded")})
+      }, )
 
     
     return (
-        <div className="orderitem">
+        <div style={styles.orderItem} className="orderitem">
             <div className="orderitem-status">{props.item.status}</div>
             TODO: add table number to order item
             {/* <div className="orderitem-tablenr">{props.item.tablenumber}</div> */}
@@ -122,8 +144,8 @@ function OrderItem(props) {
             <div className="btns">
                 {
                     props.item.status === "pending" ? 
-                    <button className="btn-progress" onClick={() => updateStatusToProgress(props.item)}>In Progress</button> :
-                    <button className="btn-done" onClick={() => updateStatusToDone(props.item)}>DONE</button>
+                    <Button style={styles.buttons} className="btn-progress" onClick={() => updateStatusToProgress(props.item)}>IN PROGRESS</Button> :
+                    <Button style={styles.buttons} className="btn-done" onClick={() => updateStatusToDone(props.item)}>DONE</Button>
                 }
             </div>
 
