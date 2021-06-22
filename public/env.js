@@ -1,3 +1,3 @@
 window.globalConfig = {
-    API_URL: "https://localhost:6001"
+    API_URL: "https://menuapi.tycho.dev"
 }
