@@ -92,15 +92,7 @@ async function GetMenuItems(itemids) {
 function OrderItem(props) {
 
     const styles = () => ({
-        // orderlist: {
-        //     background: "ffffff",
-        //     width: '100%',
-        //     display: 'flex',
-        //     flexDirection: 'column',
-        //     alignItems: 'center',
-        // },
-
-        orderItem: {
+        orderitemstyle: {
             background: "#f1f1f1",
             marginTop: '15px',
             width: '100%',
@@ -156,7 +148,7 @@ function OrderItem(props) {
 
     
     return (
-        <div style={styles.orderItem} className="orderitem">
+        <div style={styles.orderitemstyle} className="orderitem">
             <div style={styles.status} className="orderitem-status">{props.item.status}</div>
             TODO: add table number to order item
             {/* <div className="orderitem-tablenr">{props.item.tablenumber}</div> */}
