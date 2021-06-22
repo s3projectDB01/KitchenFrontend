@@ -92,21 +92,56 @@ async function GetMenuItems(itemids) {
 function OrderItem(props) {
 
     const styles = () => ({
-        orderlist: {
-            width: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center'
-        },
+        // orderlist: {
+        //     background: "ffffff",
+        //     width: '100%',
+        //     display: 'flex',
+        //     flexDirection: 'column',
+        //     alignItems: 'center',
+        // },
+
         orderItem: {
-        marginTop: '15px',
-        width: '100%',
-        padding: '5px',
-        maxWidth: '800px'
+            background: "#f1f1f1",
+            marginTop: '15px',
+            width: '100%',
+            padding: '5px',
+            maxWidth: '800px',
+            '&:hover': {
+                background: '#DCE3E9',
+                boxShadow: 3,
+            },
         },
+
+        status: {
+            fontSize: 40,
+            textAlign: 'center',
+        },
+
+        waitingTime: {
+            background: '#FDF041',
+            borderRadius: 15,
+            textAlign: 'center',
+            padding: 3,
+            margin: 15,
+        },
+
+        details: {
+            border: 3,
+            padding: 5,
+            margin: 15,
+        },
+
+        detailitems: {
+            textAlign: 'left',
+        },
+
         buttons: {
             variant: "contained",
             color: "primary",
+            '&:hover': {
+                background: '#2c387e',
+                boxShadow: 3,
+            },
         }
     })
 
@@ -122,13 +157,13 @@ function OrderItem(props) {
     
     return (
         <div style={styles.orderItem} className="orderitem">
-            <div className="orderitem-status">{props.item.status}</div>
+            <div style={styles.status} className="orderitem-status">{props.item.status}</div>
             TODO: add table number to order item
             {/* <div className="orderitem-tablenr">{props.item.tablenumber}</div> */}
-            <div className="orderitem-waitingtime">Waiting for {calculateWaitingTime(props.item.date)} minutes</div>
-            <div className="orderitem-details">
+            <div style={styles.waitingTime} className="orderitem-waitingtime">Waiting for {calculateWaitingTime(props.item.date)} minutes</div>
+            <div style={styles.details} className="orderitem-details">
                 Order Details:
-                <div className="orderitem-details-items">
+                <div style={styles.detailitems} className="orderitem-details-items">
 
                     {menuitems.map((m) => {
                         return <>
