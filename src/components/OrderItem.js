@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Moment from "react-moment";
 import "./OrderItem.css";
 import Button from '@material-ui/core/Button';
+import MenuItem from "./MenuItem";
 
 
 function calculateWaitingTime(createdTime) {
@@ -51,18 +52,19 @@ function updateStatusToProgress(props) {
         .then(refreshPage)
 }
 
-async function GetMenuItems(itemids) {
-
-    return itemids.map(element => {
-        async function fetchData() {
-            const response = await fetch(window.globalConfig.API_URL + `/Menu/MenuItems/GetById?id=${element.menuItem}`, {method:"GET", mode:"cors",
-             headers: {'Content-Type': 'application/json'}, credentials: 'include'})
-            const data = await response.json();
-            return data;
-        }
-        return fetchData();
-    });
-}
+// async function GetMenuItems(itemids) {
+//
+//     return itemids.map(element => {
+//         async function fetchData() {
+//             const response = await fetch(window.globalConfig.API_URL + `/Menu/MenuItems/GetById?id=${element.menuItem}`, {method:"GET", mode:"cors",
+//              headers: {'Content-Type': 'application/json'}, credentials: 'include'})
+//             const data = await response.json();
+//             console.log(data);
+//             return data;
+//         }
+//         return fetchData();
+//     });
+// }
 
 
 // async function GetIngredients(ingredientids) {
@@ -142,13 +144,15 @@ function OrderItem(props) {
 
     const [menuitems, setMenuitems] = useState([])
 
-    useEffect(() => {
-        GetMenuItems(props.item.items)
-          .then(res => res.json())
-          .then((result) => { setMenuitems([...menuitems, result])}, (error) => {console.log("no menu items loaded")})
-      }, )
+    // useEffect(() => {
+    //     async function fetchItems() {
+    //         await sleep(5000);
+    //         return await GetMenuItems(props.item.items)
+    //     }
+    //
+    //     setMenuitems([...menuitems, fetchItems()])
+    // }, [menuitems, props.item.items])
 
-    
     return (
         <div style={styles.orderitemstyle} className="orderitem">
             <div style={styles.status} className="orderitem-status">{props.item.status}</div>
@@ -158,15 +162,11 @@ function OrderItem(props) {
             <div style={styles.details} className="orderitem-details">
                 Order Details:
                 <div style={styles.detailitems} className="orderitem-details-items">
-
-                    {menuitems.map((m) => {
-                        return <>
-                            <ul key={m.id}>
-                                {m.name}
-                                {/* {LoadIngredients(m)} */}
-                            </ul>
-                        </>
-                    })}
+                    <ul>
+                        {props.item.items.map(menuItem => {
+                            return <MenuItem menuItemId={menuItem.menuItem} />
+                        })}
+                    </ul>
                 </div>
             </div>
 
