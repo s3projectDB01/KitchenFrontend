@@ -8,6 +8,9 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import { deprecationHandler } from "moment";
 
+import MenuItem from "./MenuItem";
+import TableNumber from "./TableNumber";
+
 
 function calculateWaitingTime(createdTime) {
     return <Moment diff={createdTime} unit="minutes"></Moment>
@@ -54,20 +57,6 @@ function updateStatusToProgress(props) {
         .then(response => response.json())
         .then(refreshPage)
 }
-
-async function GetMenuItems(itemids) {
-
-    return itemids.map(element => {
-        async function fetchData() {
-            const response = await fetch(window.globalConfig.API_URL + `/Menu/MenuItems/GetById?id=${element.menuItem}`, {method:"GET", mode:"cors",
-             headers: {'Content-Type': 'application/json'}, credentials: 'include'})
-            const data = await response.json();
-            return data;
-        }
-        return fetchData();
-    });
-}
-
 
 
 const useStyles = makeStyles((theme) => ({
@@ -122,19 +111,19 @@ function OrderItem(props) {
         />
         <CardContent>
             <div className={classes.details}>
+              <div style={classes.status} className="orderitem-status">{props.item.status}</div>
+              <TableNumber orderId={props.item.id} />
+              <div className="orderitem-waitingtime">Waiting for {calculateWaitingTime(props.item.date)} minutes</div>
+              <div style={classes.details} className="orderitem-details">
                 Order Details:
                 <div className="orderitem-details-items">
-
-                    {menuitems.map((m) => {
-                        return <>
-                            <ul key={m.id}>
-                                {m.name}
-                                {/* {LoadIngredients(m)} */}
-                            </ul>
-                        </>
-                    })}
+                    <ul>
+                        {props.item.items.map(menuItem => {
+                            return <MenuItem menuItemId={menuItem.menuItem} amount={menuItem.amount}/>
+                        })}
+                    </ul>
                 </div>
-            </div>
+              </div>
 
             <div className="btns">
                 {
